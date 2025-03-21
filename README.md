@@ -1,51 +1,88 @@
+
 # Overview
 
-<TODO: complete this with an overview of your project>
+A flask machine learning App will be deployed to Azure web services using CI/CD.
 
 ## Project Plan
-<TODO: Project Plan
 
-* A link to a Trello board for the project
-* A link to a spreadsheet that includes the original and final project plan>
+You can find the Trelloboard here: [Trello](https://trello.com/b/kBa343ig/udacitydevopsp2)
+The spreadsheet can be found in this repo.
 
-## Instructions
+# Architecture Overview
 
-<TODO:  
-* Architectural Diagram (Shows how key parts of the system work)>
+![Archtiecture](images/cd-diagram.png)
 
-<TODO:  Instructions for running the Python project.  How could a user with no context run this project without asking you for any help.  Include screenshots with explicit steps to create that work. Be sure to at least include the following screenshots:
 
-* Project running on Azure App Service
+# Images
 
-* Project cloned into Azure Cloud Shell
+![Cloned Git AZ Shell](images/cloned_git_into_azure.png)
 
-* Passing tests that are displayed after running the `make all` command from the `Makefile`
+![make all](images/make_all1.png)
 
-* Output of a test run
+![Successfull Build](images/successfull_actions_build.png)
 
-* Successful deploy of the project in Azure Pipelines.  [Note the official documentation should be referred to and double checked as you setup CI/CD](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops).
+![Logs](images/webapp_logs.png)
 
-* Running Azure App Service from Azure Pipelines automatic deployment
+![Prediction](images/prediction.png)
 
-* Successful prediction from deployed flask app in Azure Cloud Shell.  [Use this file as a template for the deployed prediction](https://github.com/udacity/nd082-Azure-Cloud-DevOps-Starter-Code/blob/master/C2-AgileDevelopmentwithAzure/project/starter_files/flask-sklearn/make_predict_azure_app.sh).
-The output should look similar to this:
+# Azure Deployment Instructions
 
-```bash
-udacity@Azure:~$ ./make_predict_azure_app.sh
-Port: 443
-{"prediction":[20.35373177134412]}
-```
+## Setup Azure Cloud Shell
 
-* Output of streamed log files from deployed application
+1.  **SSH Key Pair:**
+    ```bash
+    ssh-keygen -t rsa
+    cat ~/.ssh/id_rsa.pub # Copy output to GitHub (Settings > SSH and GPG keys)
+    ```
+2.  **Clone Repository:**
+    ```bash
+    git clone git@github.com:<your-git>/udacity-p2.git
+    ```
+3.  **Virtual Environment:**
+    ```bash
+    python3 -m venv ~/.udacity-p2
+    source ~/.udacity-p2/bin/activate
+    ```
+4.  **Install & Deploy:**
+    ```bash
+    make all
+    az webapp up -n <your-app-name> -l eastus --sku B1
+    ```
+    (Replace `<your-app-name>`. Update `make_predict_azure_app.sh` with your app URL.)
 
-> 
+## Configure GitHub Actions
+
+1.  **Create Workflow:**
+    GitHub > Actions > New workflow > Copy/paste the following:
+    ```yaml
+    name: Python application test with Github Actions
+    on: [push]
+    jobs:
+      build:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v2
+          - name: Set up Python 3.10
+            uses: actions/setup-python@v1
+            with:
+              python-version: 3.10
+          - name: Install dependencies
+            run: make install
+          - name: Lint with pylint
+            run: make lint
+          - name: Test with pytest
+            run: make test
+    ```
+
+## Configure Azure Pipeline
+
+Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/devops/pipelines/ecosystems/python-webapp?view=azure-devops).
+
 
 ## Enhancements
-
-<TODO: A short description of how to improve the project in the future>
-
+In the future we could use IaaC such as Terraform to better adhere to DevOps principles.
 ## Demo 
 
-<TODO: Add link Screencast on YouTube>
+Please find the demo here [Demo-Video](https://streamable.com/4ksd2r)
 
 
