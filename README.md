@@ -1,4 +1,4 @@
-
+![main workflow](https://github.com/KarlKolibri/udacity_devops_p2/actions/workflows/main_udap2.yml/badge.svg)
 # Overview
 
 A flask machine learning App will be deployed to Azure web services using CI/CD.
@@ -83,6 +83,6 @@ Follow [Microsoft documentation](https://docs.microsoft.com/en-us/azure/devops/p
 In the future we could use IaaC such as Terraform to better adhere to DevOps principles.
 ## Demo 
 
-Please find the demo here [Demo-Video](https://streamable.com/4ksd2r)
+Please find the demo here [Video-Link](https://streamable.com/4ksd2r)
 
 
