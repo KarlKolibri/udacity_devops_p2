@@ -6,7 +6,10 @@ A flask machine learning App will be deployed to Azure web services using CI/CD.
 ## Project Plan
 
 You can find the Trelloboard here: [Trello](https://trello.com/b/kBa343ig/udacitydevopsp2)
+
 The spreadsheet can be found in this repo.
+
+[Youtube Link](https://youtu.be/y3e3VEPMf1c)
 
 # Architecture Overview
 
@@ -14,15 +17,21 @@ The spreadsheet can be found in this repo.
 
 
 # Images
+Here are the evidence screenshots made along the development process:
 
+## Cloned Git in AZ Shell
 ![Cloned Git AZ Shell](images/cloned_git_into_azure.png)
 
+## Make all output
 ![make all](images/make_all1.png)
 
+## Succesfull Build 
 ![Successfull Build](images/successfull_actions_build.png)
 
+## Webapp Logs
 ![Logs](images/webapp_logs.png)
 
+## Webapp Prediction
 ![Prediction](images/prediction.png)
 
 # Azure Deployment Instructions
